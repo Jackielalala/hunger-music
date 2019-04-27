@@ -1,0 +1,114 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+html, body, .page {
+    height:100%;
+    width:100%;
+}
+body {
+    position:relative;
+}
+.back {
+    background:url('./1.jpg') no-repeat center center;
+    background-size:cover;
+    position:absolute;
+    height:100%;
+    width:100%;
+    opacity:0.5;
+    z-index:-1;
+}
+main {
+    height:60vh;
+    padding-left:15vh;
+    padding-top:15vh;
+}
+.back2 {
+    background-color:rgba(0,0,0,0.6);   
+}
+.pic {
+    background:url('./2.jpg') no-repeat center center;
+    background-size:cover;
+    height:40vh;
+    width:40vh;
+    margin-bottom:5vh;
+}
+.left {
+    float:left;
+    width:40vh;
+}
+.button {
+    padding-left:1vh;
+}
+.button a {
+    padding-right:12vh;
+    color:#777;
+}
+.button a:last-child {
+    padding-right:0;
+}
+.button .iconfont {
+    font-size:4vh;
+}
+.right {
+    margin-left:50vh;
+    margin-top:5vh;
+}
+.right h1 {
+    font-family:'Times New Roman';
+    color:white;
+}
+.icon {
+    color:white;
+    padding-top:10vh;
+}
+.icon .item {
+    display:inline-block;
+    padding-right:10vh;
+}
+.icon .item .iconfont {
+    font-size:3vh;
+}
+.timebar {
+    margin-top:14vh;
+    width:40vw;
+    height:.7vh;
+    background-color:grey;
+    display:inline-block;
+}
+.right > span {
+    color:white;
+    font-size:2vh;
+}
+.right .lyrics {
+    color:grey;
+    padding-top:5vh;
+}
+footer {
+    margin:5.5vh 10vw;
+}
+.lleft {
+    width:10vw;
+    text-align:center;
+}
+.rright {
+    text-align:center;
+    width:10vw;
+}
+.lleft i,
+.rright i {
+    font-size:10vh;
+    display:inline-block;
+    color:grey;
+    cursor:pointer;
+}
+.album {
+    width:60vw;
+}
+footer {
+    display:flex;
+    align-items:spance-around;
+    justify-content:center;
+}
+
