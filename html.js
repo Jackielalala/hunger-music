@@ -2,7 +2,7 @@
 
     function render(){
         $.ajax({
-            url:'http://api.jirengu.com/fm/getChannels.php',
+            url:'https://api.jirengu.com/fm/getChannels.php',
             type:'get',
             dataType:'json'
         }).done(function(data){
