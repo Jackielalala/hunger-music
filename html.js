@@ -1,5 +1,4 @@
-    isToStart = true;
-    isToEnd = false;
+
 
     function render(){
         $.ajax({
@@ -16,24 +15,30 @@
             })
 
             var count = Math.floor($('.box').outerWidth(true)/$('.song').outerWidth(true));
+            var isToStart = true;
+            var isToEnd = false;
+
 
             if(!isToEnd){
                 $('.rightBtn').on('click',function(){
                     $('.album').animate({
                         left:'-='+ count*$('.song').outerWidth(true)
-                    },400)
-                    isToStart = false;
+                    },400,function(){
+                        if((parseFloat($('.box').width())-parseFloat($('.album').css('left'))) >= $('.album').outerWidth(true)){
+                            console.log('over');
+                            isToEnd = true;
+                        }
+                    })
+                    isToStart = false;  
                 })
             }
-
             if(!isToStart){
                 $('.leftBtn').on('click',function(){
                     $('.album').animate({
                         left:'+='+ count*$('.song').outerWidth(true)
                     },400)
-                })                
-            }
-
+                })  
+            }        
 
         }).fail(function(){
             console.log('error')
