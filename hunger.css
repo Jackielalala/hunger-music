@@ -65,7 +65,7 @@ main {
 }
 .icon {
     color:white;
-    padding-top:10vh;
+    padding-top:8vh;
 }
 .icon .item {
     display:inline-block;
@@ -75,7 +75,7 @@ main {
     font-size:3vh;
 }
 .timebar {
-    margin-top:14vh;
+    margin-top:10vh;
     width:40vw;
     height:.7vh;
     background-color:grey;
@@ -95,33 +95,39 @@ main {
     padding-top:5vh;
 }
 footer {
-    margin:0 5vw;
+    margin:0 3vw;
 }
-.lleft {
+.leftBtn {
+    float:left;
     padding:5.5vh 0;
-    width:10vw;
+    width:8vw;
     text-align:center;
 }
-.rright {
+.rightBtn {
+    float:right;
     text-align:center;
-    width:10vw;
+    width:8vw;
     padding:5.5vh 0;
 }
-.lleft i,
-.rright i {
+.leftBtn i,
+.rightBtn i {
     font-size:10vh;
     display:inline-block;
     color:grey;
     cursor:pointer;
 }
-.lleft i:hover,
-.rright i:hover {
+.leftBtn i:hover,
+.rightBtn i:hover {
     color:rgb(227,221,215);
 }
-.album {
+.box {
+    position:relative;
     width:60vw;
-    wrap:no-wrap;
-/*    overflow:hidden;*/
+    overflow:hidden;
+}
+.album {
+    position:absolute;
+    white-space:nowrap;
 }
 footer {
     display:flex;
@@ -137,10 +143,9 @@ footer {
     color:rgba(255,255,255,.5)
 }
 .song .cover {
-    background:url('./3.png') no-repeat center center;
     background-size:cover;
-    width:9vw;
-    height:16vh;
+    width:8vw;
+    height:14vh;
 }
 .album .song p {
     line-height:2em;
