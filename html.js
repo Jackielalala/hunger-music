@@ -1,8 +1,16 @@
 
-
-    function render(){
+var Footer = {
+    init:function(){
+        this.bind();
+        this.isToStart = true;
+        this.isToStart = false;
+    },
+    bind:function(){
+        this.render();
+    },
+    render:function(){
         $.ajax({
-            url:'https://api.jirengu.com/fm/getChannels.php',
+            url:'http://api.jirengu.com/fm/getChannels.php',
             type:'get',
             dataType:'json'
         }).done(function(data){
@@ -13,32 +21,38 @@
                 </div>`
                 $('.album').append($html);
             })
-
+            var _this = this;
             var count = Math.floor($('.box').outerWidth(true)/$('.song').outerWidth(true));
-            var isToStart = true;
-            var isToEnd = false;
 
-
-            if(!isToEnd){
                 $('.rightBtn').on('click',function(){
-                    $('.album').animate({
-                        left:'-='+ count*$('.song').outerWidth(true)
-                    },400,function(){
-                        if((parseFloat($('.box').width())-parseFloat($('.album').css('left'))) >= $('.album').outerWidth(true)){
-                            console.log('over');
-                            isToEnd = true;
-                        }
-                    })
-                    isToStart = false;  
+                    console.log($('.album').css('left'))
+                    if(!_this.isToEnd){
+                        $('.album').animate({
+                            left:'-='+ count*$('.song').outerWidth(true)
+                        },400,function(){
+                            if((parseFloat($('.box').width())-parseFloat($('.album').css('left'))) >= $('.album').outerWidth(true)){
+                                console.log('over');
+                                _this.isToEnd = true;
+                            }
+                        })
+                        _this.isToStart = false;  
+                    }
+
                 })
-            }
-            if(!isToStart){
+
                 $('.leftBtn').on('click',function(){
-                    $('.album').animate({
-                        left:'+='+ count*$('.song').outerWidth(true)
-                    },400)
-                })  
-            }        
+                    console.log($('.album').css('left'));
+                    if(!_this.isToStart){
+                        $('.album').animate({
+                            left:'+='+ count*$('.song').outerWidth(true)
+                        },400,function(){
+                        _this.isToEnd = false;
+                        if(parseFloat($('.album').css('left')) >= 0){
+                            _this.isToStart = true;
+                        }
+                        })
+                    }
+                })
 
         }).fail(function(){
             console.log('error')
@@ -46,5 +60,6 @@
             console.log('ok')
         })
     }
+}
 
-    render();
+Footer.init();
