@@ -10,7 +10,7 @@ var Footer = {
     },
     render:function(){
         $.ajax({
-            url:'http://api.jirengu.com/fm/getChannels.php',
+            url:'./hunger.json',
             type:'get',
             dataType:'json'
         }).done(function(data){
