@@ -40,6 +40,10 @@ var Footer = {
                     var audio = new Audio();
                     audio.src = ret.song[0].url;
                     audio.autoplay = true;
+                    console.log(ret);
+                    var _title = ret.song[0].title;
+                    $('.right .title').text(_title);
+                    $('.left .pic').css('background',`url(${ret.song[0].picture}) no-repeat center center`);
                 })
             })
             
