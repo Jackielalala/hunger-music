@@ -90,8 +90,14 @@ main {
     color:white;
     font-size:2vh;
 }
+.right h5{
+    line-height:3em;
+}
 .right .lyrics {
     color:grey;
+    line-height:1.5em;
+}
+.lyrics p {
     padding-top:5vh;
 }
 footer {
@@ -148,7 +154,7 @@ footer {
     height:14vh;
 }
 .album .song p {
-    line-height:2em;
+    line-height:1.5em;
 }
 .song:hover {
     box-shadow:0 0 2px 2px white;

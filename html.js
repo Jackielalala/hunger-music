@@ -1,3 +1,11 @@
+//EventCenter = {
+//    on:function(type,handler){
+//        $(document).addEventListener(type,handler);
+//    },
+//    fire:function(type,data){
+//        $(document).trigger(type,data);
+//    }
+//}
 
 var Footer = {
     init:function(){
@@ -19,12 +27,29 @@ var Footer = {
                 </div>`
                 $('.album').append($html);
             })
+
+            $('.song').on('click',function(){
+                var channelId = $('.song').attr('data-id');
+                console.log(channelId);
+                $.ajax({
+                    url:'http://api.jirengu.com/fm/getSong.php',
+                    channel:channelId,
+                    type:'GET',
+                    dataType:'json'
+                }).done(function(ret){
+                    var audio = new Audio();
+                    audio.src = ret.song[0].url;
+                    audio.autoplay = true;
+                })
+            })
+            
+
+
             var _this = this;
             var count = Math.floor($('.box').outerWidth(true)/$('.song').outerWidth(true));
   
                 $('.rightBtn').on('click',function(){ 
-                    console.log(!_this.isAnimate);
-                    console.log($('.album').css('left'))
+         
                     if(!_this.isAnimate){
 
                         if(!_this.isToEnd){
@@ -47,8 +72,7 @@ var Footer = {
                 })
 
                 $('.leftBtn').on('click',function(){
-
-                    console.log(!_this.isAnimate);
+    
                     if(!_this.isAnimate){
 
                         if(!_this.isToStart){
@@ -68,9 +92,6 @@ var Footer = {
                         }
                     }
                 })
-                console.log(_this.isAnimate);
-                console.log(_this.isToEnd);
-
         }).fail(function(){
             console.log('error')
         }).always(function(){
@@ -79,4 +100,6 @@ var Footer = {
     }
 }
 
+
 Footer.init();
+
