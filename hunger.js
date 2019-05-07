@@ -28,7 +28,13 @@ var Footer = {
                 $('.album').append($html);
             })
 
+            var audio = new Audio();
             $('.song').on('click',function(){
+                audio.pause();
+
+                var _this = this;
+                console.log(this);
+
                 var channelId = $('.song').attr('data-id');
                 console.log(channelId);
                 $.ajax({
@@ -37,18 +43,40 @@ var Footer = {
                     type:'GET',
                     dataType:'json'
                 }).done(function(ret){
-                    var audio = new Audio();
                     audio.src = ret.song[0].url;
                     audio.autoplay = true;
+                    console.log(audio.ended)
+                    audio.onplaying = function (){
+                        $('.button .btn-play').removeClass('icon-play').addClass('icon-pause');
+                    }
+                    audio.onended = function(){
+                        $('.button .btn-play').removeClass('icon-pause').addClass('icon-play');
+                    }   
+                    $('.button .btn-play').on('click',function(){
+                        if($('.button .btn-play').hasClass('icon-pause')){
+                            $('.button .btn-play').toggleClass('icon-pause').toggleClass('icon-play');
+                            audio.pause();                        
+                        }else if($('.button .btn-play').hasClass('icon-play')){
+                            $('.button .btn-play').toggleClass('icon-pause').toggleClass('icon-play');
+                            audio.play();   
+                        }
+                    })
+
+
+
+ 
                     console.log(ret);
                     var _title = ret.song[0].title;
                     $('.right .title').text(_title);
                     $('.left .pic').css('background',`url(${ret.song[0].picture}) no-repeat center center`);
+                    $('.lyrics .singer').text(`${ret.song[0].artist}`);
+
+                    $('.icon-lovecopy').on('click',function(){
+                        $(".icon-lovecopy").toggleClass('star');
+                    
                 })
             })
             
-
-
             var _this = this;
             var count = Math.floor($('.box').outerWidth(true)/$('.song').outerWidth(true));
   
@@ -96,14 +124,9 @@ var Footer = {
                         }
                     }
                 })
-        }).fail(function(){
-            console.log('error')
-        }).always(function(){
-            console.log('ok')
         })
-    }
+    })
+  }
 }
 
-
 Footer.init();
-
