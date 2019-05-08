@@ -86,16 +86,19 @@ main {
     display:inline-block;
 }
 .current {
-    width:20vw;
+    width:0vw;
     height:.7vh;
     background-color:white;
+    transition:.8s;
 }
 .right > span {
     color:white;
     font-size:2vh;
 }
 .lyrics p.singer{
+    padding-top:3vh;
     line-height:2em;
+    color:rgb(238, 226, 226);
 }
 .right .lyrics {
     color:grey;
