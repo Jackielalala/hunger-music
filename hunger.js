@@ -7,7 +7,7 @@
 //    }
 //}
 
-var Footer = {
+var Music = {
     init:function(){
         this.isToStart = true;
         this.isToStart = false;
@@ -28,13 +28,29 @@ var Footer = {
                 $('.album').append($html);
             })
 
+            var _this = this;
             var audio = new Audio();
+            var $btn = $('.button .btn-play');
+            audio.onplaying = function (){
+                $btn.removeClass('icon-play').addClass('icon-pause');
+                console.log(audio.played)
+            }
+            audio.onended = function(){
+                $btn.removeClass('icon-pause').addClass('icon-play');
+            }   
+            $btn.on('click',function(){
+                if($btn.hasClass('icon-pause')){
+                    $btn.removeClass('icon-pause').addClass('icon-play');
+                    audio.pause();                        
+                }else{
+                    $btn.removeClass('icon-play').addClass('icon-pause');
+                    audio.play();   
+                }
+            })
             $('.song').on('click',function(){
                 audio.pause();
-
                 var _this = this;
                 console.log(this);
-
                 var channelId = $('.song').attr('data-id');
                 console.log(channelId);
                 $.ajax({
@@ -45,25 +61,6 @@ var Footer = {
                 }).done(function(ret){
                     audio.src = ret.song[0].url;
                     audio.autoplay = true;
-                    console.log(audio.ended)
-                    audio.onplaying = function (){
-                        $('.button .btn-play').removeClass('icon-play').addClass('icon-pause');
-                    }
-                    audio.onended = function(){
-                        $('.button .btn-play').removeClass('icon-pause').addClass('icon-play');
-                    }   
-                    $('.button .btn-play').on('click',function(){
-                        if($('.button .btn-play').hasClass('icon-pause')){
-                            $('.button .btn-play').toggleClass('icon-pause').toggleClass('icon-play');
-                            audio.pause();                        
-                        }else if($('.button .btn-play').hasClass('icon-play')){
-                            $('.button .btn-play').toggleClass('icon-pause').toggleClass('icon-play');
-                            audio.play();   
-                        }
-                    })
-
-
-
  
                     console.log(ret);
                     var _title = ret.song[0].title;
@@ -73,7 +70,6 @@ var Footer = {
 
                     $('.icon-lovecopy').on('click',function(){
                         $(".icon-lovecopy").toggleClass('star');
-                    
                 })
             })
             
@@ -83,7 +79,6 @@ var Footer = {
                 $('.rightBtn').on('click',function(){ 
          
                     if(!_this.isAnimate){
-
                         if(!_this.isToEnd){
                             _this.isAnimate = true;
                             $('.album').animate({
@@ -95,18 +90,14 @@ var Footer = {
                                     console.log('over');
                                     _this.isAnimate = false;
                                     _this.isToEnd = true;
-
                                 }
                             })
- 
                         }
                     }
                 })
 
                 $('.leftBtn').on('click',function(){
-    
                     if(!_this.isAnimate){
-
                         if(!_this.isToStart){
                             _this.isAnimate = true;
                             $('.album').animate({
@@ -117,10 +108,8 @@ var Footer = {
                                 if(parseFloat($('.album').css('left')) >= 0){
                                     _this.isAnimate = false;
                                     _this.isToStart = true;
-
                                 }
                             })
-
                         }
                     }
                 })
@@ -129,4 +118,4 @@ var Footer = {
   }
 }
 
-Footer.init();
+Music.init();
