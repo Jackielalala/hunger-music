@@ -47,6 +47,35 @@ var Music = {
                     audio.play();   
                 }
             })
+
+            
+            $('.icon-lovecopy').on('click',function(){
+                $(".icon-lovecopy").toggleClass('star');
+            })
+
+            $('.icon-next').on('click',function(){
+                audio.pause();
+                var _this = this;
+                console.log(this);
+                var channelId = $('.song').attr('data-id');
+                console.log(channelId);
+                $.ajax({
+                    url:'http://api.jirengu.com/fm/getSong.php',
+                    channel:channelId,
+                    type:'GET',
+                    dataType:'json'
+                }).done(function(ret){
+                    audio.src = ret.song[0].url;
+                    audio.autoplay = true;
+ 
+                    console.log(ret);
+                    var _title = ret.song[0].title;
+                    $('.right .title').text(_title);
+                    $('.left .pic').css('background',`url(${ret.song[0].picture}) no-repeat center center`);
+                    $('.lyrics .singer').text(`${ret.song[0].artist}`);
+                })
+            })
+
             $('.song').on('click',function(){
                 audio.pause();
                 var _this = this;
@@ -68,8 +97,6 @@ var Music = {
                     $('.left .pic').css('background',`url(${ret.song[0].picture}) no-repeat center center`);
                     $('.lyrics .singer').text(`${ret.song[0].artist}`);
 
-                    $('.icon-lovecopy').on('click',function(){
-                        $(".icon-lovecopy").toggleClass('star');
                 })
             })
             
@@ -113,7 +140,7 @@ var Music = {
                         }
                     }
                 })
-        })
+        
     })
   }
 }
